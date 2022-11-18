@@ -1,0 +1,31 @@
+name: "Close pull requests beyond limit"
+description: "Closes new pull requests when the limit of opened pull requests is reached."
+author: "Jeremy Montesinos"
+branding:
+  icon: "git-pull-request"
+  color: "red"
+inputs:
+  github_private_token:
+    description: "Your Github private token for this app. Please generate one in : https://github.com/settings/tokens."
+    required: true
+  limit:
+    description: "Limit number of pull request opened in the repository."
+    required: true
+  comment:
+    description: "Comment just before closing a pull request."
+    required: false
+  pull_request_number:
+    description: 'Number of pull request to close'
+    required: true
+  repository:
+    description: 'Repository, format: "OWNER/REPO"'
+    required: true
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  args:
+    - ${{ inputs.github_private_token }}
+    - ${{ inputs.limit }}
+    - ${{ inputs.pull_request_number }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.comment }}
