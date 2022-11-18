@@ -1,8 +1,8 @@
-FROM node:16.15.1
+FROM alpine:latest
 
 ADD run.sh /
 
-RUN npm install -g node-jq
+RUN apk add --no-cache jq
 
 RUN chmod +x /run.sh
 
